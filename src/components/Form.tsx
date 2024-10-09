@@ -8,6 +8,10 @@ export const Form = () => {
     calories: 0,
   });
 
+  const handleChange = (e) => {
+    setPerformance({ ...performance, [e.target.id]: e.target.value });
+  };
+
   return (
     <section className="bg-teal-100 py-20 px-5">
       <div className="max-w-4xl mx-auto">
@@ -20,6 +24,7 @@ export const Form = () => {
               className="border border-slate-300 p-2 rounded-lg w-full"
               id="category"
               value={performance.category}
+              onChange={handleChange}
             >
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -39,6 +44,7 @@ export const Form = () => {
               className="border border-slate-300 p-2 rounded-lg w-full"
               placeholder="Food or Exercise"
               value={performance.activity}
+              onChange={handleChange}
             />
           </div>
 
@@ -52,13 +58,14 @@ export const Form = () => {
               className="border border-slate-300 p-2 rounded-lg w-full"
               placeholder="Calories burned"
               value={performance.calories}
+              onChange={handleChange}
             />
           </div>
 
           <input
             type="submit"
             className="bg-zinc-700 hover:bg-zinc-800 w-full p-2 text-white cursor-pointer font-bold uppercase"
-            value="Save food or exercise"
+            value="Save food or save exercise"
           />
         </form>
       </div>
