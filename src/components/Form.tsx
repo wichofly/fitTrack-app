@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from 'react';
 import { categories } from '../data/categories';
+import { Performance } from '../types/interface';
 
 export const Form = () => {
-  const [performance, setPerformance] = useState({
+  const [performance, setPerformance] = useState<Performance>({
     category: 1,
     activity: '',
     calories: 0,
@@ -11,7 +12,12 @@ export const Form = () => {
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
-    setPerformance({ ...performance, [e.target.id]: e.target.value });
+    const isNumberField = ['category', 'calories'].includes(e.target.id);
+
+    setPerformance({
+      ...performance,
+      [e.target.id]: isNumberField ? +e.target.value : e.target.value,
+    });
   };
 
   return (
