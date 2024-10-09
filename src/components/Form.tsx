@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { categories } from '../data/categories';
 import { Performance } from '../types/interface';
 
@@ -25,10 +25,29 @@ export const Form = () => {
     return activity.trim() !== '' && calories > 0;
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    console.log('Form submitted:', performance);
+
+    // Optionally, reset the form state after submission
+    setPerformance({
+      category: 1,
+      activity: '',
+      calories: 0,
+    });
+
+    // Optionally, show a success message
+    alert('Activity saved successfully!');
+  };
+
   return (
     <section className="bg-teal-100 py-20 px-5">
       <div className="max-w-4xl mx-auto">
-        <form className="space-y-5 bg-gray-100 shadow p-10 rounded-lg">
+        <form
+          className="space-y-5 bg-gray-100 shadow p-10 rounded-lg"
+          onSubmit={handleSubmit}
+        >
           <div className="grid grid-cols-1 gap-3">
             <label htmlFor="category" className="font-bold">
               Category:
