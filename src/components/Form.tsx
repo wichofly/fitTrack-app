@@ -78,7 +78,7 @@ export const Form = () => {
           <input
             type="submit"
             className="bg-zinc-700 hover:bg-zinc-800 w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
-            value="Save food or save exercise"
+            value={performance.category === 1 ? 'Save Food' : 'Save Exercise'}
             disabled={!isValidActivity()}
           />
         </form>
