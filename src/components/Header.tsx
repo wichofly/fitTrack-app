@@ -4,7 +4,9 @@ export const Header = () => {
       <div className="max-w-4xl mx-auto flex justify-between">
         <h1 className="text-lg font-bold uppercase">Calorie Counter</h1>
 
-        <button>Recheck</button>
+        <button className="hover:bg-red-300 hover:text-black px-1 rounded-md">
+          Recheck
+        </button>
       </div>
     </header>
   );
