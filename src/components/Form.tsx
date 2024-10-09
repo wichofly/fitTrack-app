@@ -20,6 +20,11 @@ export const Form = () => {
     });
   };
 
+  const isValidActivity = () => {
+    const { activity, calories } = performance;
+    return activity.trim() !== '' && calories > 0;
+  };
+
   return (
     <section className="bg-teal-100 py-20 px-5">
       <div className="max-w-4xl mx-auto">
@@ -72,8 +77,9 @@ export const Form = () => {
 
           <input
             type="submit"
-            className="bg-zinc-700 hover:bg-zinc-800 w-full p-2 text-white cursor-pointer font-bold uppercase"
+            className="bg-zinc-700 hover:bg-zinc-800 w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
             value="Save food or save exercise"
+            disabled={!isValidActivity()}
           />
         </form>
       </div>
