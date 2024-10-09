@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { categories } from '../data/categories';
 
 export const Form = () => {
@@ -8,7 +8,9 @@ export const Form = () => {
     calories: 0,
   });
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+  ) => {
     setPerformance({ ...performance, [e.target.id]: e.target.value });
   };
 
