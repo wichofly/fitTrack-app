@@ -20,8 +20,12 @@ const ActivityList = ({ activities }: Props) => {
           >
             <div>
               <p>{movement.category}</p>
-              <p>{movement.activity}</p>
-              <p className="font-bold text-3xl text-teal-600">{movement.calories} Calories</p>
+              <p className="font-bold text-2xl text-slate-600 pt-5">
+                {movement.activity}
+              </p>
+              <p className="font-bold text-3xl text-teal-600">
+                {movement.calories} Calories
+              </p>
             </div>
 
             <div>
