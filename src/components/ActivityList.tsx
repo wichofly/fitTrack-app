@@ -22,14 +22,24 @@ const ActivityList = ({ activities }: Props) => {
         {activities.map((movement) => (
           <div
             key={movement.id}
-            className="px-5 py-10 mt-5  shadow-lg flex justify-between "
+            className="px-5 py-10 mt-5 shadow-lg flex justify-between "
           >
-            <div>
-              <p className="">{categoryName(movement.category)}</p>
+            <div className="space-y-2 relative">
+              <p
+                className={`absolute -top-8 -left-8 px-10 py-2 text-white rounded-lg shadow-md uppercase font-bold ${
+                  movement.category === 1 ? 'bg-teal-600' : 'bg-cyan-600'
+                }`}
+              >
+                {categoryName(movement.category)}
+              </p>
               <p className="font-bold text-2xl text-slate-600 pt-5">
                 {movement.activity}
               </p>
-              <p className="font-bold text-3xl text-teal-600">
+              <p
+                className={`font-bold text-3xl ${
+                  movement.category === 1 ? 'text-teal-600' : 'text-cyan-600'
+                }`}
+              >
                 {movement.calories} Calories
               </p>
             </div>
