@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, FormEvent, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { categories } from '../data/categories';
 import { Performance } from '../types/interface';
 import { ActivityActions } from '../reducers/activityReducer';
@@ -7,7 +8,8 @@ interface Prop {
   dispatch: Dispatch<ActivityActions>;
 }
 
-const initialSate = {
+const initialSate: Performance = {
+  id: uuidv4(),
   category: 1,
   activity: '',
   calories: 0,
@@ -37,7 +39,10 @@ export const Form = ({ dispatch }: Prop) => {
 
     dispatch({ type: 'save-activity', payload: { newActivity: performance } });
 
-    setPerformance(initialSate);
+    setPerformance({
+      ...initialSate,
+      id: uuidv4(),
+    });
 
     // Optionally, show a success message
     alert('Activity saved successfully!');
