@@ -1,11 +1,20 @@
-import { Performance } from '../types/interface';
+import { useMemo } from 'react';
+import { Categories, Performance } from '../types/interface';
 
 interface Props {
   activities: Performance[];
+  categories: Categories[];
 }
 
-const ActivityList = ({ activities }: Props) => {
-  console.log(activities);
+const ActivityList = ({ activities, categories }: Props) => {
+  const categoryName = useMemo(() => {
+    const getName = categories.reduce((convertToName, category) => {
+      convertToName[category.id] = category.name;
+      return convertToName;
+    }, {} as Record<number, string>);
+
+    return (categoryId: number) => getName[categoryId] || 'Unknown';
+  }, [categories]); // Only recalculate if `categories` changes
 
   return (
     <>
@@ -19,7 +28,7 @@ const ActivityList = ({ activities }: Props) => {
             className="px-5 py-10 mt-5  shadow-lg flex justify-between "
           >
             <div>
-              <p>{movement.category}</p>
+              <p>{categoryName(movement.category)}</p>
               <p className="font-bold text-2xl text-slate-600 pt-5">
                 {movement.activity}
               </p>
