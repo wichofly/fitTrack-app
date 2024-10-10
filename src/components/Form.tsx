@@ -1,8 +1,13 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, FormEvent, useState } from 'react';
 import { categories } from '../data/categories';
 import { Performance } from '../types/interface';
+import { ActivityActions } from '../reducers/activityReducer';
 
-export const Form = () => {
+interface Prop {
+  dispatch: Dispatch<ActivityActions>;
+}
+
+export const Form = ({ dispatch }: Prop) => {
   const [performance, setPerformance] = useState<Performance>({
     category: 1,
     activity: '',
@@ -28,14 +33,7 @@ export const Form = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
-    console.log('Form submitted:', performance);
-
-    // Optionally, reset the form state after submission
-    setPerformance({
-      category: 1,
-      activity: '',
-      calories: 0,
-    });
+    dispatch({ type: 'save-activity', payload: { newActivity: performance } });
 
     // Optionally, show a success message
     alert('Activity saved successfully!');
@@ -96,7 +94,7 @@ export const Form = () => {
 
           <input
             type="submit"
-            className="bg-zinc-700 hover:bg-zinc-800 w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
+            className="bg-zinc-700 hover:bg-zinc-800 rounded-lg w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
             value={performance.category === 1 ? 'Save Food' : 'Save Exercise'}
             disabled={!isValidActivity()}
           />
