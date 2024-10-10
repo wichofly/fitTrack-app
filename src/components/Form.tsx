@@ -7,12 +7,14 @@ interface Prop {
   dispatch: Dispatch<ActivityActions>;
 }
 
+const initialSate = {
+  category: 1,
+  activity: '',
+  calories: 0,
+};
+
 export const Form = ({ dispatch }: Prop) => {
-  const [performance, setPerformance] = useState<Performance>({
-    category: 1,
-    activity: '',
-    calories: 0,
-  });
+  const [performance, setPerformance] = useState<Performance>(initialSate);
 
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
@@ -34,6 +36,8 @@ export const Form = ({ dispatch }: Prop) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     dispatch({ type: 'save-activity', payload: { newActivity: performance } });
+
+    setPerformance(initialSate);
 
     // Optionally, show a success message
     alert('Activity saved successfully!');
