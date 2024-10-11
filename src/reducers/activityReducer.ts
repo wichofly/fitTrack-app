@@ -1,12 +1,12 @@
 import { Performance } from '../types/interface';
 
+interface ActivityState {
+  activities: Performance[];
+}
+
 export interface ActivityActions {
   type: 'save-activity';
   payload: { newActivity: Performance };
-}
-
-interface ActivityState {
-  activities: Performance[];
 }
 
 export const initialSate: ActivityState = {
