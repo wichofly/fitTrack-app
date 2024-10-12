@@ -6,7 +6,7 @@ interface ActivityState {
 }
 
 export interface ActivityActions {
-  type: 'save-activity' | 'save-activeId';
+  type: 'save-activity' | 'set-activeId';
   payload: { newActivity: Performance } | { id: Performance['id'] };
 }
 
@@ -28,7 +28,7 @@ export const activityReducer = (
     };
   }
 
-  if (action.type === 'save-activeId') {
+  if (action.type === 'set-activeId') {
     const { id } = action.payload as { id: Performance['id'] };
     
     return {
