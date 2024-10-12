@@ -6,8 +6,11 @@ export interface ActivityState {
 }
 
 export interface ActivityActions {
-  type: 'save-activity' | 'set-activeId';
-  payload: { newActivity: Performance } | { id: Performance['id'] };
+  type: 'save-activity' | 'set-activeId' | 'delete-activity';
+  payload:
+    | { newActivity: Performance }
+    | { id: Performance['id'] }
+    | { id: Performance['id'] };
 }
 
 export const initialSate: ActivityState = {
@@ -45,6 +48,19 @@ export const activityReducer = (
     return {
       ...state,
       activeId: id,
+    };
+  }
+
+  if (action.type === 'delete-activity') {
+    const { id } = action.payload as { id: Performance['id'] };
+
+    const deleteActivity = state.activities.filter(
+      (activity) => activity.id !== id
+    );
+
+    return {
+      ...state,
+      activities: deleteActivity,
     };
   }
 

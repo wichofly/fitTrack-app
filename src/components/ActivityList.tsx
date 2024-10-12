@@ -3,6 +3,7 @@ import { Performance } from '../types/interface';
 import { categories } from '../data/categories';
 import { FaRegEdit } from 'react-icons/fa';
 import { ActivityActions } from '../reducers/activityReducer';
+import { RiDeleteBinLine } from 'react-icons/ri';
 
 interface Props {
   activities: Performance[];
@@ -60,6 +61,17 @@ const ActivityList = ({ activities, dispatch }: Props) => {
               }
             >
               <FaRegEdit />
+            </button>
+            <button
+              className="text-3xl text-red-500 hover:text-red-600"
+              onClick={() =>
+                dispatch({
+                  type: 'delete-activity',
+                  payload: { id: movement.id },
+                })
+              }
+            >
+              <RiDeleteBinLine />
             </button>
           </div>
         </div>
