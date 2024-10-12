@@ -11,7 +11,7 @@ function App() {
     <>
       <Header />
       <Form dispatch={dispatch} />
-      <ActivityList activities={state.activities} />
+      <ActivityList activities={state.activities} dispatch={dispatch} />
     </>
   );
 }

@@ -1,13 +1,15 @@
-import { useMemo } from 'react';
+import { Dispatch, useMemo } from 'react';
 import { Performance } from '../types/interface';
 import { categories } from '../data/categories';
 import { FaRegEdit } from 'react-icons/fa';
+import { ActivityActions } from '../reducers/activityReducer';
 
 interface Props {
   activities: Performance[];
+  dispatch: Dispatch<ActivityActions>;
 }
 
-const ActivityList = ({ activities }: Props) => {
+const ActivityList = ({ activities, dispatch }: Props) => {
   const categoryName = useMemo(() => {
     return (categoryId: Performance['category']) => {
       const category = categories.find((cat) => cat.id === categoryId);
@@ -48,7 +50,15 @@ const ActivityList = ({ activities }: Props) => {
           </div>
 
           <div className="flex gap-5 items-center">
-            <button className="text-3xl text-slate-700 hover:text-slate-800">
+            <button
+              className="text-3xl text-slate-700 hover:text-slate-800"
+              onClick={() =>
+                dispatch({
+                  type: 'set-activeId',
+                  payload: { id: movement.id },
+                })
+              }
+            >
               <FaRegEdit />
             </button>
           </div>
