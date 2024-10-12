@@ -1,11 +1,12 @@
-import { ChangeEvent, Dispatch, FormEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { categories } from '../data/categories';
 import { Performance } from '../types/interface';
-import { ActivityActions } from '../reducers/activityReducer';
+import { ActivityActions, ActivityState } from '../reducers/activityReducer';
 
 interface Prop {
   dispatch: Dispatch<ActivityActions>;
+  state: ActivityState;
 }
 
 const initialSate: Performance = {
@@ -15,8 +16,17 @@ const initialSate: Performance = {
   calories: 0,
 };
 
-export const Form = ({ dispatch }: Prop) => {
+export const Form = ({ dispatch, state }: Prop) => {
   const [performance, setPerformance] = useState<Performance>(initialSate);
+
+  useEffect(() => {
+    if (state.activeId) {
+      const selectedActivity = state.activities.filter(
+        (stateActivity) => stateActivity.id === state.activeId
+      )[0];
+      setPerformance(selectedActivity);
+    }
+  }, [state.activeId, state.activities]);
 
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>

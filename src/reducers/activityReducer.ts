@@ -1,6 +1,6 @@
 import { Performance } from '../types/interface';
 
-interface ActivityState {
+export interface ActivityState {
   activities: Performance[];
   activeId: Performance['id'];
 }
