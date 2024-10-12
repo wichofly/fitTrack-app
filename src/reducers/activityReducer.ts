@@ -22,15 +22,26 @@ export const activityReducer = (
   if (action.type === 'save-activity') {
     const { newActivity } = action.payload as { newActivity: Performance };
 
+    let updatedActivities: Performance[] = [];
+
+    if (state.activeId) {
+      updatedActivities = state.activities.map((activity) =>
+        activity.id === state.activeId ? newActivity : activity
+      );
+    } else {
+      updatedActivities = [...state.activities, newActivity];
+    }
+
     return {
       ...state,
-      activities: [...state.activities, newActivity],
+      activities: updatedActivities,
+      activeId: '',
     };
   }
 
   if (action.type === 'set-activeId') {
     const { id } = action.payload as { id: Performance['id'] };
-    
+
     return {
       ...state,
       activeId: id,
