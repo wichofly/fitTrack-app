@@ -18,13 +18,15 @@ const ActivityList = ({ activities, dispatch }: Props) => {
     };
   }, []);
 
+  const isEmptyActivities = activities.length === 0;
+
   return (
     <section className="p-10 mx-auto max-w-4xl">
       <h2 className="text-4xl font-bold text-center text-slate-600">
         Food and Activities with Calories
       </h2>
 
-      {activities.length === 0 ? (
+      {isEmptyActivities ? (
         <p className="text-center text-slate-600 mt-10">
           Not Activity is done yet
         </p>
