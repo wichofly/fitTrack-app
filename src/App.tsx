@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header activities={state.activities} dispatch={dispatch}/>
       <Form dispatch={dispatch} state={state} />
       <ActivityList activities={state.activities} dispatch={dispatch} />
     </>

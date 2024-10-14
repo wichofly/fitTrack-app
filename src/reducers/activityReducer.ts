@@ -6,8 +6,8 @@ export interface ActivityState {
 }
 
 export interface ActivityActions {
-  type: 'save-activity' | 'set-activeId' | 'delete-activity';
-  payload: { newActivity: Performance } | { id: Performance['id'] };
+  type: 'save-activity' | 'set-activeId' | 'delete-activity' | 'restart-app';
+  payload?: { newActivity?: Performance } | { id?: Performance['id'] };
 }
 
 const localStorageActivities = (): Performance[] => {
@@ -64,6 +64,10 @@ export const activityReducer = (
       ...state,
       activities: deleteActivity,
     };
+  }
+
+  if (action.type === 'restart-app') {
+    return initialSate
   }
 
   return state;
