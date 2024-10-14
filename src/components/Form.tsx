@@ -1,13 +1,32 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { categories } from '../data/categories';
 import { Performance } from '../types/interface';
+import { ActivityActions, ActivityState } from '../reducers/activityReducer';
 
-export const Form = () => {
-  const [performance, setPerformance] = useState<Performance>({
-    category: 1,
-    activity: '',
-    calories: 0,
-  });
+interface Prop {
+  dispatch: Dispatch<ActivityActions>;
+  state: ActivityState;
+}
+
+const initialSate: Performance = {
+  id: uuidv4(),
+  category: 1,
+  activity: '',
+  calories: 0,
+};
+
+export const Form = ({ dispatch, state }: Prop) => {
+  const [performance, setPerformance] = useState<Performance>(initialSate);
+
+  useEffect(() => {
+    if (state.activeId) {
+      const selectedActivity = state.activities.filter(
+        (stateActivity) => stateActivity.id === state.activeId
+      )[0];
+      setPerformance(selectedActivity);
+    }
+  }, [state.activeId, state.activities]);
 
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
@@ -28,13 +47,11 @@ export const Form = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
-    console.log('Form submitted:', performance);
+    dispatch({ type: 'save-activity', payload: { newActivity: performance } });
 
-    // Optionally, reset the form state after submission
     setPerformance({
-      category: 1,
-      activity: '',
-      calories: 0,
+      ...initialSate,
+      id: uuidv4(),
     });
 
     // Optionally, show a success message
@@ -96,7 +113,7 @@ export const Form = () => {
 
           <input
             type="submit"
-            className="bg-zinc-700 hover:bg-zinc-800 w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
+            className="bg-zinc-700 hover:bg-zinc-800 rounded-lg w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
             value={performance.category === 1 ? 'Save Food' : 'Save Exercise'}
             disabled={!isValidActivity()}
           />
