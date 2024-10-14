@@ -1,0 +1,50 @@
+import { useMemo } from 'react';
+import { Performance } from '../types/interface';
+
+interface Props {
+  activities: Performance[];
+}
+
+export const CalorieTracker = ({ activities }: Props) => {
+  const caloriesConsumed = useMemo(
+    () =>
+      activities.reduce(
+        (total, activity) =>
+          activity.category === 1 ? total + activity.calories : total, // category 1 is for food
+        0
+      ),
+    [activities]
+  );
+
+  const caloriesBurned = useMemo(
+    () =>
+      activities.reduce(
+        (total, activity) =>
+          activity.category === 2 ? total + activity.calories : total, // category 2 is for exercise
+        0
+      ),
+    [activities]
+  );
+
+  return (
+    <section className="bg-amber-200 py-10 px-5">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-4xl font-bold text-center text-slate-600">
+          Calorie Summary
+        </h2>
+
+        <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-10">
+          <p className="text-2xl text-slate-600 rounded-full grid grid-cols-1 text-center">
+            <span className="font-bold text-3xl">{caloriesConsumed}</span>
+            Consumed
+          </p>
+
+          <p className="text-2xl text-slate-600 rounded-full grid grid-cols-1 text-center">
+            <span className="font-bold text-3xl">{caloriesBurned}</span>
+            Burned
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
