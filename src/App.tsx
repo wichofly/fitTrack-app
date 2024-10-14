@@ -9,19 +9,8 @@ function App() {
 
   // Load from localStorage on app initialization
   useEffect(() => {
-    const storedActivities = localStorage.getItem('activities');
-    const storedActiveId = localStorage.getItem('activeId');
-
-    if (storedActivities) {
-      dispatch({
-        type: 'load-state',
-        payload: {
-          activities: JSON.parse(storedActivities),
-          activeId: storedActiveId || '', // If there's no storedActiveId, fallback to empty string
-        },
-      });
-    }
-  }, [dispatch]); // Only runs on mount
+    localStorage.setItem('activities', JSON.stringify(state.activities));
+  }, [state.activities]);
 
   return (
     <>

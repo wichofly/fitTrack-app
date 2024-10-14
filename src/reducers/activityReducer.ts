@@ -6,15 +6,17 @@ export interface ActivityState {
 }
 
 export interface ActivityActions {
-  type: 'save-activity' | 'set-activeId' | 'delete-activity' | 'load-state';
-  payload:
-    | { newActivity: Performance }
-    | { id: Performance['id'] }
-    | { activities: Performance[]; activeId: Performance['id'] };
+  type: 'save-activity' | 'set-activeId' | 'delete-activity';
+  payload: { newActivity: Performance } | { id: Performance['id'] };
 }
 
+const localStorageActivities = (): Performance[] => {
+  const activities = localStorage.getItem('activities');
+  return activities ? JSON.parse(activities) : [];
+};
+
 export const initialSate: ActivityState = {
-  activities: [],
+  activities: localStorageActivities(),
   activeId: '',
 };
 
@@ -22,19 +24,6 @@ export const activityReducer = (
   state: ActivityState = initialSate,
   action: ActivityActions
 ) => {
-  if (action.type === 'load-state') {
-    const { activities, activeId } = action.payload as {
-      activities: Performance[];
-      activeId: Performance['id'];
-    };
-
-    return {
-      ...state,
-      activities,
-      activeId,
-    };
-  }
-
   if (action.type === 'save-activity') {
     const { newActivity } = action.payload as { newActivity: Performance };
 
@@ -48,8 +37,6 @@ export const activityReducer = (
       updatedActivities = [...state.activities, newActivity];
     }
 
-    localStorage.setItem('activities', JSON.stringify(updatedActivities));
-
     return {
       ...state,
       activities: updatedActivities,
@@ -59,8 +46,6 @@ export const activityReducer = (
 
   if (action.type === 'set-activeId') {
     const { id } = action.payload as { id: Performance['id'] };
-
-    localStorage.setItem('activeId', id);
 
     return {
       ...state,
@@ -74,8 +59,6 @@ export const activityReducer = (
     const deleteActivity = state.activities.filter(
       (activity) => activity.id !== id
     );
-
-    localStorage.setItem('activities', JSON.stringify(deleteActivity));
 
     return {
       ...state,
