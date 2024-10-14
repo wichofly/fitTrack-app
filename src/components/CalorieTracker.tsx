@@ -27,6 +27,11 @@ export const CalorieTracker = ({ activities }: Props) => {
     [activities]
   );
 
+  const totalCalories = useMemo(
+    () => caloriesConsumed - caloriesBurned,
+    [caloriesConsumed, caloriesBurned]
+  );
+
   return (
     <section className="bg-amber-200 py-10 px-5">
       <div className="max-w-4xl mx-auto">
@@ -37,6 +42,7 @@ export const CalorieTracker = ({ activities }: Props) => {
         <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-10">
           <CaloriesDisplay calories={caloriesConsumed} text="Consumed" />
           <CaloriesDisplay calories={caloriesBurned} text="Burned" />
+          <CaloriesDisplay calories={totalCalories} text="Difference" />
         </div>
       </div>
     </section>
