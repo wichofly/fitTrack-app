@@ -33,9 +33,9 @@ export const CalorieTracker = ({ activities }: Props) => {
   );
 
   return (
-    <section className="bg-amber-200 py-10 px-5">
+    <section className="bg-white py-10 px-5">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-slate-600">
+        <h2 className="text-4xl font-bold text-center text-teal-700">
           Calorie Summary
         </h2>
 

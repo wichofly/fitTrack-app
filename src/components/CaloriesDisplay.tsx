@@ -5,9 +5,11 @@ interface Props {
 
 export const CaloriesDisplay = ({ calories, text }: Props) => {
   return (
-    <p className="text-2xl text-slate-600 rounded-full grid grid-cols-1 text-center">
-      <span className="font-bold text-4xl">{calories}</span>
-      {text}
-    </p>
+    <div className="bg-gradient-to-br from-teal-100 to-teal-300 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center transform hover:scale-105">
+      <p className="text-5xl font-bold text-teal-800">{calories}</p>
+      <span className="text-xl text-teal-700 mt-2 block font-medium tracking-wider uppercase">
+        {text}
+      </span>
+    </div>
   );
 };

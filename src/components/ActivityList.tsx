@@ -22,19 +22,19 @@ const ActivityList = ({ activities, dispatch }: Props) => {
 
   return (
     <section className="p-10 mx-auto max-w-4xl">
-      <h2 className="text-4xl font-bold text-center text-slate-600">
+      <h2 className="text-4xl font-bold text-center text-teal-700">
         Food and Activities with Calories
       </h2>
 
       {isEmptyActivities ? (
-        <p className="text-center text-slate-600 mt-10">
+        <p className="text-center text-slate-500 mt-10">
           Not Activity is done yet
         </p>
       ) : (
         activities.map((movement) => (
           <div
             key={movement.id}
-            className="px-5 py-10 mt-5 shadow-lg flex justify-between "
+            className="px-5 py-10 mt-5 shadow-lg flex justify-between bg-white border border-gray-200 rounded-lg"
           >
             <div className="space-y-2 relative">
               <p
@@ -45,7 +45,7 @@ const ActivityList = ({ activities, dispatch }: Props) => {
                 {categoryName(movement.category)}
               </p>
 
-              <p className="font-bold text-2xl text-slate-600 pt-5">
+              <p className="font-bold text-2xl text-slate-700 pt-5">
                 {movement.activity}
               </p>
 
@@ -60,7 +60,7 @@ const ActivityList = ({ activities, dispatch }: Props) => {
 
             <div className="flex gap-5 items-center">
               <button
-                className="text-3xl text-slate-700 hover:text-slate-800"
+                className="text-3xl text-slate-600 hover:text-teal-600 transition-colors"
                 onClick={() =>
                   dispatch({
                     type: 'set-activeId',
@@ -71,7 +71,7 @@ const ActivityList = ({ activities, dispatch }: Props) => {
                 <FaRegEdit />
               </button>
               <button
-                className="text-3xl text-red-500 hover:text-red-600"
+                className="text-3xl text-red-500 hover:text-red-600 transition-colors"
                 onClick={() =>
                   dispatch({
                     type: 'delete-activity',
