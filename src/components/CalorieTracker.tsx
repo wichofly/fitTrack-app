@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Performance } from '../types/interface';
+import { CaloriesDisplay } from './CaloriesDisplay';
 
 interface Props {
   activities: Performance[];
@@ -34,15 +35,8 @@ export const CalorieTracker = ({ activities }: Props) => {
         </h2>
 
         <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-10">
-          <p className="text-2xl text-slate-600 rounded-full grid grid-cols-1 text-center">
-            <span className="font-bold text-3xl">{caloriesConsumed}</span>
-            Consumed
-          </p>
-
-          <p className="text-2xl text-slate-600 rounded-full grid grid-cols-1 text-center">
-            <span className="font-bold text-3xl">{caloriesBurned}</span>
-            Burned
-          </p>
+          <CaloriesDisplay calories={caloriesConsumed} text="Consumed" />
+          <CaloriesDisplay calories={caloriesBurned} text="Burned" />
         </div>
       </div>
     </section>
