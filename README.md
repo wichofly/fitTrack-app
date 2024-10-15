@@ -50,10 +50,10 @@ npm run dev
 
 - State is managed using `useReducer` in combination with `localStorage`.
 - Activities are logged as an array of objects, where each object contains:
-  - id: Unique identifier.
-  - category: Either food (1) or exercise (2).
-  - activity: Description of the activity.
-  - calories: The number of calories.
+  - `id`: Unique identifier.
+  - `category`: Either food (1) or exercise (2).
+  - `category`: Description of the activity.
+  - `calories`: The number of calories.
 
 ## Deploy in Netlify
 - [fitTrack-app](https://fittracker0.netlify.app/)
