@@ -55,5 +55,5 @@ npm run dev
   - activity: Description of the activity.
   - calories: The number of calories.
 
-  ## Deploy in Netlify
+## Deploy in Netlify
 - [fitTrack-app](https://fittracker0.netlify.app/)
