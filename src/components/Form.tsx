@@ -113,7 +113,7 @@ export const Form = ({ dispatch, state }: Prop) => {
 
           <input
             type="submit"
-            className="bg-teal-600 hover:bg-teal-700 rounded-lg w-full p-2 text-white cursor-pointer font-bold uppercase transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-teal-600 hover:bg-teal-700 rounded-lg w-full p-2 text-white cursor-pointer font-semibold uppercase transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             value={performance.category === 1 ? 'Save Food' : 'Save Exercise'}
             disabled={!isValidActivity()}
           />
