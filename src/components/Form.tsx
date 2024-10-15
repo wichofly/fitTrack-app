@@ -59,18 +59,18 @@ export const Form = ({ dispatch, state }: Prop) => {
   };
 
   return (
-    <section className="bg-teal-100 py-20 px-5">
+    <section className="bg-gray-50 py-20 px-5">
       <div className="max-w-4xl mx-auto">
         <form
-          className="space-y-5 bg-gray-100 shadow p-10 rounded-lg"
+          className="space-y-5 bg-white shadow p-10 rounded-lg border border-gray-200"
           onSubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 gap-3">
-            <label htmlFor="category" className="font-bold">
+            <label htmlFor="category" className="font-bold text-gray-700">
               Category:
             </label>
             <select
-              className="border border-slate-300 p-2 rounded-lg w-full"
+              className="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
               id="category"
               value={performance.category}
               onChange={handleChange}
@@ -84,13 +84,13 @@ export const Form = ({ dispatch, state }: Prop) => {
           </div>
 
           <div className="grid grid-cols-1 gap-3">
-            <label htmlFor="activity" className="font-bold">
+            <label htmlFor="activity" className="font-bold text-gray-700">
               Activity:
             </label>
             <input
               id="activity"
               type="text"
-              className="border border-slate-300 p-2 rounded-lg w-full"
+              className="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
               placeholder="Food or Exercise"
               value={performance.activity}
               onChange={handleChange}
@@ -98,13 +98,13 @@ export const Form = ({ dispatch, state }: Prop) => {
           </div>
 
           <div className="grid grid-cols-1 gap-3">
-            <label htmlFor="calories" className="font-bold">
+            <label htmlFor="calories" className="font-bold text-gray-700">
               Calories:
             </label>
             <input
               id="calories"
               type="text"
-              className="border border-slate-300 p-2 rounded-lg w-full"
+              className="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
               placeholder="Calories burned"
               value={performance.calories}
               onChange={handleChange}
@@ -113,7 +113,7 @@ export const Form = ({ dispatch, state }: Prop) => {
 
           <input
             type="submit"
-            className="bg-zinc-700 hover:bg-zinc-800 rounded-lg w-full p-2 text-white cursor-pointer font-bold uppercase disabled:opacity-5"
+            className="bg-teal-600 hover:bg-teal-700 rounded-lg w-full p-2 text-white cursor-pointer font-semibold uppercase transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             value={performance.category === 1 ? 'Save Food' : 'Save Exercise'}
             disabled={!isValidActivity()}
           />
