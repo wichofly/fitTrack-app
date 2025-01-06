@@ -23,25 +23,31 @@ FitTrack is a calorie tracking app that allows users to log their food intake an
 ## How to Use fitTrack
 
 **Prerequisites**
+
 - Node.js installed on your machine.
 
 **Installation**
+
 1. Clone the repository:
+
 ```
 git clone https://github.com/your-username/fitTrack.git
-````
+```
 
 2. Navigate to the project folder:
+
 ```
 cd fitTrack
 ```
 
-3. Install dependencies:  
+3. Install dependencies:
+
 ```
 npm install
 ```
 
 4. Run the app:
+
 ```
 npm run dev
 ```
@@ -56,4 +62,5 @@ npm run dev
   - `calories`: The number of calories.
 
 ## Deploy in Netlify
+
 - [fitTrack-app](https://fittracker0.netlify.app/)
