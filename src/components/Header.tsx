@@ -19,7 +19,10 @@ export const Header = ({ activities, dispatch }: Props) => {
         <button
           className="flex gap-2 hover:bg-teal-600 p-2 font-bold uppercase cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           disabled={!canRestartApp}
-          onClick={() => dispatch({ type: 'restart-app' })}
+          onClick={() => {
+            localStorage.removeItem('activities');
+            dispatch({ type: 'restart-app' });
+          }}
         >
           <RiRestartLine className="text-2xl" /> Restart App
         </button>
