@@ -3,8 +3,8 @@ export interface Categories {
   name: string;
 }
 
-export interface Performance {
-  id: string
+export interface Activity {
+  id: string;
   category: number;
   activity: string;
   calories: number;

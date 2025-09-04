@@ -1,12 +1,12 @@
-import { useReducer, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Form } from './components/Form';
 import { Header } from './components/Header';
 import ActivityList from './components/ActivityList';
-import { activityReducer, initialSate } from './reducers/activityReducer';
 import { CalorieTracker } from './components/CalorieTracker';
+import { useActivity } from './hooks/useActivity';
 
 function App() {
-  const [state, dispatch] = useReducer(activityReducer, initialSate);
+  const { state } = useActivity();
 
   // Load from localStorage on app initialization
   useEffect(() => {
@@ -15,10 +15,10 @@ function App() {
 
   return (
     <>
-      <Header activities={state.activities} dispatch={dispatch} />
-      <Form dispatch={dispatch} state={state} />
-      <CalorieTracker activities={state.activities} />
-      <ActivityList activities={state.activities} dispatch={dispatch} />
+      <Header />
+      <Form />
+      <CalorieTracker />
+      <ActivityList />
     </>
   );
 }

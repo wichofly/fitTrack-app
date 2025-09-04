@@ -1,23 +1,19 @@
-import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { categories } from '../data/categories';
-import { Performance } from '../types/interface';
-import { ActivityActions, ActivityState } from '../reducers/activityReducer';
+import { Activity } from '../types/interface';
+import { useActivity } from '../hooks/useActivity';
 
-interface Prop {
-  dispatch: Dispatch<ActivityActions>;
-  state: ActivityState;
-}
-
-const initialSate: Performance = {
+const initialSate: Activity = {
   id: uuidv4(),
   category: 1,
   activity: '',
   calories: 0,
 };
 
-export const Form = ({ dispatch, state }: Prop) => {
-  const [performance, setPerformance] = useState<Performance>(initialSate);
+export const Form = () => {
+  const { state, dispatch } = useActivity();
+  const [performance, setPerformance] = useState<Activity>(initialSate);
 
   useEffect(() => {
     if (state.activeId) {
