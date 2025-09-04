@@ -18,7 +18,7 @@ function App() {
       <Header activities={state.activities} dispatch={dispatch} />
       <Form dispatch={dispatch} state={state} />
       <CalorieTracker />
-      <ActivityList activities={state.activities} dispatch={dispatch} />
+      <ActivityList />
     </>
   );
 }

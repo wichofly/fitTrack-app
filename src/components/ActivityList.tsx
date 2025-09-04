@@ -1,24 +1,9 @@
-import { Dispatch, useMemo } from 'react';
-import { Performance } from '../types/interface';
-import { categories } from '../data/categories';
 import { FaRegEdit } from 'react-icons/fa';
-import { ActivityActions } from '../reducers/activityReducer';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { useActivity } from '../hooks/useActivity';
 
-interface Props {
-  activities: Performance[];
-  dispatch: Dispatch<ActivityActions>;
-}
-
-const ActivityList = ({ activities, dispatch }: Props) => {
-  const categoryName = useMemo(() => {
-    return (categoryId: Performance['category']) => {
-      const category = categories.find((cat) => cat.id === categoryId);
-      return category ? category.name : '';
-    };
-  }, []);
-
-  const isEmptyActivities = activities.length === 0;
+const ActivityList = () => {
+  const { state, dispatch, categoryName, isEmptyActivities } = useActivity();
 
   return (
     <section className="p-10 mx-auto max-w-4xl">
@@ -31,7 +16,7 @@ const ActivityList = ({ activities, dispatch }: Props) => {
           Not Activity is done yet
         </p>
       ) : (
-        activities.map((movement) => (
+        state.activities.map((movement) => (
           <div
             key={movement.id}
             className="px-5 py-10 mt-5 shadow-lg flex justify-between bg-white border border-gray-200 rounded-lg"
