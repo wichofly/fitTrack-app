@@ -7,7 +7,7 @@ import { useActivity } from './hooks/useActivity';
 
 function App() {
   const { state, dispatch } = useActivity();
-  
+
   // Load from localStorage on app initialization
   useEffect(() => {
     localStorage.setItem('activities', JSON.stringify(state.activities));
@@ -17,7 +17,7 @@ function App() {
     <>
       <Header activities={state.activities} dispatch={dispatch} />
       <Form dispatch={dispatch} state={state} />
-      <CalorieTracker activities={state.activities} />
+      <CalorieTracker />
       <ActivityList activities={state.activities} dispatch={dispatch} />
     </>
   );

@@ -1,36 +1,8 @@
-import { useMemo } from 'react';
-import { Performance } from '../types/interface';
 import { CaloriesDisplay } from './CaloriesDisplay';
+import { useActivity } from '../hooks/useActivity';
 
-interface Props {
-  activities: Performance[];
-}
-
-export const CalorieTracker = ({ activities }: Props) => {
-  const caloriesConsumed = useMemo(
-    () =>
-      activities.reduce(
-        (total, activity) =>
-          activity.category === 1 ? total + activity.calories : total, // category 1 is for food
-        0
-      ),
-    [activities]
-  );
-
-  const caloriesBurned = useMemo(
-    () =>
-      activities.reduce(
-        (total, activity) =>
-          activity.category === 2 ? total + activity.calories : total, // category 2 is for exercise
-        0
-      ),
-    [activities]
-  );
-
-  const totalCalories = useMemo(
-    () => caloriesConsumed - caloriesBurned,
-    [caloriesConsumed, caloriesBurned]
-  );
+export const CalorieTracker = () => {
+  const { caloriesConsumed, caloriesBurned, totalCalories } = useActivity();
 
   return (
     <section className="bg-white py-10 px-5">
