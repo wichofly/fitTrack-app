@@ -1,15 +1,9 @@
-import { Dispatch } from 'react';
 import { RiRestartLine } from 'react-icons/ri';
-import { ActivityActions } from '../reducers/activityReducer';
-import { Activity } from '../types/interface';
+import { useActivity } from '../hooks/useActivity';
 
-interface Props {
-  activities: Activity[];
-  dispatch: Dispatch<ActivityActions>;
-}
-
-export const Header = ({ activities, dispatch }: Props) => {
-  const canRestartApp = activities.length;
+export const Header = () => {
+  const { state, dispatch } = useActivity();
+  const canRestartApp = state.activities.length;
 
   return (
     <header className=" bg-teal-700 text-white border-b-4 border-teal-500 p-4 ">

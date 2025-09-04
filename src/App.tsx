@@ -6,7 +6,7 @@ import { CalorieTracker } from './components/CalorieTracker';
 import { useActivity } from './hooks/useActivity';
 
 function App() {
-  const { state, dispatch } = useActivity();
+  const { state } = useActivity();
 
   // Load from localStorage on app initialization
   useEffect(() => {
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <Header activities={state.activities} dispatch={dispatch} />
+      <Header />
       <Form />
       <CalorieTracker />
       <ActivityList />
