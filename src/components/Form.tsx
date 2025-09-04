@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { categories } from '../data/categories';
-import { Performance } from '../types/interface';
+import { Activity } from '../types/interface';
 import { ActivityActions, ActivityState } from '../reducers/activityReducer';
 
 interface Prop {
@@ -9,7 +9,7 @@ interface Prop {
   state: ActivityState;
 }
 
-const initialSate: Performance = {
+const initialSate: Activity = {
   id: uuidv4(),
   category: 1,
   activity: '',
@@ -17,7 +17,7 @@ const initialSate: Performance = {
 };
 
 export const Form = ({ dispatch, state }: Prop) => {
-  const [performance, setPerformance] = useState<Performance>(initialSate);
+  const [performance, setPerformance] = useState<Activity>(initialSate);
 
   useEffect(() => {
     if (state.activeId) {

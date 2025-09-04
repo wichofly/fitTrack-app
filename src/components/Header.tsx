@@ -1,10 +1,10 @@
 import { Dispatch } from 'react';
 import { RiRestartLine } from 'react-icons/ri';
 import { ActivityActions } from '../reducers/activityReducer';
-import { Performance } from '../types/interface';
+import { Activity } from '../types/interface';
 
 interface Props {
-  activities: Performance[];
+  activities: Activity[];
   dispatch: Dispatch<ActivityActions>;
 }
 
