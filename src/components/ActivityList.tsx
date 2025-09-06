@@ -13,7 +13,7 @@ const ActivityList = () => {
 
       {isEmptyActivities ? (
         <p className="text-center text-slate-500 mt-10">
-          Not Activity is done yet
+          Not activities have been done yet
         </p>
       ) : (
         state.activities.map((movement) => (

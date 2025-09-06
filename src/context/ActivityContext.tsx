@@ -13,7 +13,7 @@ interface ActivityProviderProps {
 }
 
 interface ActivityContextProps {
-  state: ActivityState; 
+  state: ActivityState;
   dispatch: Dispatch<ActivityActions>;
   caloriesConsumed: number;
   caloriesBurned: number;
@@ -52,12 +52,10 @@ export const ActivityProvider = ({ children }: ActivityProviderProps) => {
     [caloriesConsumed, caloriesBurned]
   );
 
-  const categoryName = useMemo(() => {
-    return (categoryId: Activity['category']) => {
-      const category = categories.find((cat) => cat.id === categoryId);
-      return category ? category.name : '';
-    };
-  }, []);
+  const categoryName = (categoryId: Activity['category']) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category ? category.name : '';
+  };
 
   const isEmptyActivities = state.activities.length === 0;
 
