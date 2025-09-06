@@ -80,6 +80,7 @@ yarn build
 
 ## Project structure (high level)
 
+```
 - src/
   - components/
     - Header.tsx
@@ -97,6 +98,7 @@ yarn build
   - types/
     - interface.ts
   - main.tsx
+```
 
 ## Deploy in Netlify
 
