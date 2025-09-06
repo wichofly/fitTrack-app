@@ -12,7 +12,7 @@ const ActivityList = () => {
       </h2>
 
       {isEmptyActivities ? (
-        <p className="text-center text-slate-500 mt-10">
+        <p className="text-center text-2xl text-slate-500 mt-10">
           Not activities have been done yet
         </p>
       ) : (
