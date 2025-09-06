@@ -1,65 +1,102 @@
-# Fit Track App 🍏🏃‍♂️⚡️
+# FitTrack — Calorie Tracker
 
-FitTrack is a calorie tracking app that allows users to log their food intake and exercises, calculate calories consumed and burned, and keep a summary of their activities. The app ensures a seamless experience with persistent data storage via `localStorage` and is designed with a responsive UI using modern React tools.
+A small React + TypeScript app to track calories consumed (food) and calories burned (exercise). State is managed with a central context built on React's useReducer + useContext patterns and persisted to localStorage.
 
-## Key Features
+This repo includes a recent refactor (see PR #4) that consolidates activity state and logic into a single ActivityContext and a custom useActivity hook, removing prop drilling and simplifying component contracts.
 
-- **Activity Tracking:** Log food intake and exercises with calorie counts.
-- **Category Filtering:** Differentiate between food and exercise activities.
-- **Calorie Summary:** Track calories consumed, burned, and the net difference.
-- **Edit and Delete:** Modify or remove logged activities.
-- **Persistent Data:** Uses localStorage to retain activities across sessions.
-- **App Restart:** Clear all activities and start fresh.
+## What’s new (PR #4 — Context)
 
-## Key Technologies and Tools
+- Centralized state and logic in `ActivityContext` (uses useReducer internally) to manage activities, calorie calculations, and related actions.
+- New `useActivity` hook to consume context across components (Header, Form, CalorieTracker, ActivityList).
+- Components no longer accept activity-related props or dispatch; they read state and call actions from context.
+- Renamed the main data type from `Performance` to `Activity` for clarity.
+- Improved reducer behavior on `restart-app` to properly clear activities and activeId, and the restart action now also clears localStorage.
+- Overall result: easier maintenance, fewer prop chains, and a single place for calculating totals and handling persistence.
 
-- **React:** Built with functional components and hooks (`useReducer`, `useEffect`, `useMemo`).
-- **TypeScript:** Strongly typed components and logic ensure robustness.
-- **Tailwind CSS:** For a clean and responsive UI.
-- **React Icons:** Icons for enhancing the visual appeal of the app.
-- **UUID:** Used for generating unique activity IDs.
-- **Local Storage:** Persistent storage for activity logs across sessions.
+## Features
 
-## How to Use fitTrack
+- Add food or exercise items with calories
+- Edit and delete activities
+- Totals for calories consumed, calories burned, and net calories
+- Persistent state using localStorage
+- Centralized ActivityContext + reducer + custom hook
+- Clean component interfaces (Header, Form, CalorieTracker, ActivityList)
 
-**Prerequisites**
+## Tech stack
 
-- Node.js installed on your machine.
+- React
+- TypeScript
+- Vite (or CRA — adjust scripts if needed)
+- Tailwind CSS (used in components)
+- uuid (for unique ids)
+- LocalStorage
 
-**Installation**
+## Getting started
 
-1. Clone the repository:
+1. Clone the repo
 
+```bash
+git clone https://github.com/wichofly/fitTrack-app.git
+cd fitTrack-app
 ```
-git clone https://github.com/your-username/fitTrack.git
-```
 
-2. Navigate to the project folder:
+2. Install dependencies
 
-```
-cd fitTrack
-```
-
-3. Install dependencies:
-
-```
+```bash
 npm install
+# or
+yarn
 ```
 
-4. Run the app:
+3. Run locally
 
-```
+```bash
 npm run dev
+# or
+yarn dev
 ```
 
-## Data Flow
+4. Build for production
 
-- State is managed using `useReducer` in combination with `localStorage`.
-- Activities are logged as an array of objects, where each object contains:
-  - `id`: Unique identifier.
-  - `category`: Either food (1) or exercise (2).
-  - `category`: Description of the activity.
-  - `calories`: The number of calories.
+```bash
+npm run build
+# or
+yarn build
+```
+
+## Usage notes
+
+- Global state: The app is wrapped with `ActivityProvider` (in `src/main.tsx`) so any component can call `useActivity()` to get state and actions.
+- Actions available from context typically include: save/add activity, delete activity, set active activity (for editing), and restart-app (clears state + localStorage).
+- Totals: calorie aggregates (consumed/burned/net) are computed centrally in the context so every component reads the same source of truth without recomputing in each place.
+- Persisted storage key: activities are saved to localStorage; restart clears localStorage as part of the reset flow.
+
+## Recommended patterns used in the codebase
+
+- Centralize expensive or shared computations in context (or in reducer write-actions) to keep renders simple.
+- Prefer a single-pass reduce for multiple aggregates (e.g., calculate consumed and burned in one pass).
+- Use input type="number" for numeric fields and parse with Number() plus guards for NaN.
+- Keep handlers generic in forms but prefer name attributes over brittle id-based updates.
+
+## Project structure (high level)
+
+- src/
+  - components/
+    - Header.tsx
+    - Form.tsx
+    - ActivityList.tsx
+    - CalorieTracker.tsx
+  - context/
+    - ActivityContext.tsx
+  - hooks/
+    - useActivity.ts
+  - reducers/
+    - activityReducer.ts
+  - data/
+    - categories.ts
+  - types/
+    - interface.ts
+  - main.tsx
 
 ## Deploy in Netlify
 
